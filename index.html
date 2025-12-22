@@ -1,11 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Telegram</title>
-  <meta http-equiv="refresh" content="1;url=https://t.me/belpriceparts">
+<meta charset="UTF-8">
+<title>BelPrice — запчасти</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --bg: #03040a;
+  --card: rgba(255,255,255,0.07);
+  --text: #ffffff;
+  --accent: #00f0ff;
+  --accent2: #8f00ff;
+}
+
+body.light {
+  --bg: #f2f4f8;
+  --card: #ffffff;
+  --text: #111;
+  --accent: #0066ff;
+  --accent2: #00c6ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(0,240,255,0.15), transparent 60%),
+    radial-gradient(circle at bottom, rgba(143,0,255,0.2), transparent 60%),
+    var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+}
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  padding: 34px;
+  border-radius: 28px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 0 40px rgba(0,240,255,0.25),
+    0 0 80px rgba(143,0,255,0.15);
+  text-align: center;
+  animation: appear 1s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(30px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  box-shadow:
+    0 0 20px var(--accent),
+    0 0 45px var(--accent2);
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 27px;
+  margin: 12px 0;
+  letter-spacing: 0.3px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.btn {
+  position: relative;
+  display: block;
+  margin-top: 28px;
+  padding: 17px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  box-shadow:
+    0 0 25px rgba(0,240,255,0.6),
+    0 0 50px rgba(143,0,255,0.5);
+  animation: pulse 2.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow:
+      0 0 25px rgba(0,240,255,0.6),
+      0 0 50px rgba(143,0,255,0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 45px rgba(0,240,255,0.9),
+      0 0 90px rgba(143,0,255,0.8);
+  }
+  100% {
+    box-shadow:
+      0 0 25px rgba(0,240,255,0.6),
+      0 0 50px rgba(143,0,255,0.4);
+  }
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.ad {
+  margin-top: 14px;
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+.toggle {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 22px;
+  cursor: pointer;
+  user-select: none;
+}
+</style>
 </head>
+
 <body>
-  <p>Переход в Telegram…</p>
+
+<div class="toggle" onclick="toggleTheme()">🌗</div>
+
+<div class="card">
+  <img class="avatar"
+       src="https://t.me/i/userpic/320/belpriceparts.jpg"
+       alt="BelPrice">
+
+  <h1>BelPrice</h1>
+
+  <p>
+    Онлайн-аукцион, агрегатор и интернет-магазин запчастей.<br><br>
+    📦 Любые детали — в разы дешевле, гарантия производителя<br>
+    ⚡️ Доставка за 24 часа по всей РФ<br>
+    💳 Крипта / безнал / наличные<br><br>
+    Следи за лотами и выгодными предложениями
+  </p>
+
+  <a class="btn" href="https://t.me/belpriceparts">
+    Открыть Telegram
+  </a>
+
+  <div class="ad">
+    Рекламная ссылка • Официальный канал
+  </div>
+</div>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle('light');
+}
+</script>
+
 </body>
 </html>
