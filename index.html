@@ -2,17 +2,41 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>BelPrice — выбор платформы</title>
+<title>BelPrice — аукцион запчастей</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== YANDEX METRIKA ===== -->
+<script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106317064', 'ym');
+
+    ym(106317064, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/106317064" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</script>
+<!-- ========================= -->
 
 <style>
 :root {
   --bg: #0b1220;
   --card: rgba(255,255,255,0.07);
   --text: #ffffff;
+  --neutral: rgba(255,255,255,0.08);
   --tg: #2AABEE;
   --vk: #005BFF;
-  --neutral: rgba(255,255,255,0.08);
+}
+
+body.light {
+  --bg: #f3f5f8;
+  --card: #ffffff;
+  --text: #111;
+  --neutral: #eef1f4;
 }
 
 * { box-sizing: border-box; }
@@ -21,73 +45,76 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(42,171,238,0.12), transparent 60%),
-    radial-gradient(circle at bottom, rgba(0,91,255,0.15), transparent 60%),
+    radial-gradient(circle at top, rgba(42,171,238,0.10), transparent 60%),
+    radial-gradient(circle at bottom, rgba(0,91,255,0.12), transparent 60%),
     var(--bg);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text);
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.4s;
 }
 
 .card {
+  position: relative;
   width: 100%;
   max-width: 460px;
   padding: 36px;
   border-radius: 28px;
   background: var(--card);
   backdrop-filter: blur(16px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.55);
   text-align: center;
-  animation: appear 0.9s ease;
-  transition: box-shadow 0.3s, background 0.3s;
+  animation: appear 0.8s ease;
+  transition: box-shadow 0.3s;
 }
 
-.card.tg-active {
-  box-shadow: 0 0 50px rgba(42,171,238,0.8);
-}
-
-.card.vk-active {
-  box-shadow: 0 0 50px rgba(0,91,255,0.8);
-}
+.card.tg-focus { box-shadow: 0 0 45px rgba(42,171,238,0.8); }
+.card.vk-focus { box-shadow: 0 0 45px rgba(0,91,255,0.8); }
 
 @keyframes appear {
   from { opacity: 0; transform: translateY(25px) scale(0.96); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+.toggle {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
 .avatar {
   width: 112px;
   height: 112px;
   border-radius: 50%;
-  border: 3px solid #2AABEE;
-  box-shadow: 0 0 25px rgba(42,171,238,0.6);
+  border: 3px solid var(--tg);
+  box-shadow: 0 0 22px rgba(42,171,238,0.6);
   object-fit: cover;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 h1 {
   font-size: 28px;
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
 .subtitle {
   font-size: 15px;
-  opacity: 0.9;
+  opacity: 0.85;
   margin-bottom: 14px;
 }
 
 p {
   font-size: 15px;
   line-height: 1.55;
-  opacity: 0.92;
 }
 
-/* ===== ПЛАТФОРМЫ ===== */
-
+/* Платформы */
 .platforms {
-  margin-top: 30px;
+  margin-top: 28px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
@@ -98,34 +125,22 @@ p {
   border-radius: 20px;
   background: var(--neutral);
   cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.platform span {
   font-size: 18px;
   font-weight: 700;
+  transition: 0.25s ease;
 }
 
-.platform small {
-  display: block;
-  margin-top: 6px;
-  font-size: 13px;
-  opacity: 0.7;
+.platform:hover {
+  transform: translateY(-2px) scale(1.03);
 }
 
-/* Hover */
-.platform.tg:hover {
-  background: rgba(42,171,238,0.18);
-}
-
-.platform.vk:hover {
-  background: rgba(0,91,255,0.18);
-}
+.platform.tg:hover { box-shadow: 0 0 25px rgba(42,171,238,0.6); }
+.platform.vk:hover { box-shadow: 0 0 25px rgba(0,91,255,0.6); }
 
 .note {
-  margin-top: 18px;
+  margin-top: 16px;
   font-size: 13px;
-  opacity: 0.6;
+  opacity: 0.65;
 }
 </style>
 </head>
@@ -133,6 +148,8 @@ p {
 <body>
 
 <div class="card" id="card">
+  <div class="toggle" onclick="toggleTheme()">🌗</div>
+
   <img class="avatar"
        src="https://t.me/i/userpic/320/belpriceparts.jpg"
        alt="BelPrice">
@@ -143,33 +160,45 @@ p {
   <p>
     📦 Любые детали — в разы дешевле<br>
     ⚡️ Доставка за 24 часа по всей РФ<br>
-    💳 Криптовалюта / Оплата по карте
+    💳 Криптовалюта / Оплата по карте / Безналичный расчёт
   </p>
 
   <div class="platforms">
-
-    <div class="platform tg" onclick="openTelegram()">
-      <span>Telegram</span>
-      <small>Канал и лоты</small>
-    </div>
-
-    <div class="platform vk" onclick="openVK()">
-      <span>VK</span>
-      <small>Сообщество</small>
-    </div>
-
+    <div class="platform tg" onclick="openTelegram()">Telegram</div>
+    <div class="platform vk" onclick="openVK()">VK</div>
   </div>
 
   <div class="note">
-    Выберите удобную платформу
+    🔒 Прямые продавцы • Прозрачные лоты
   </div>
 </div>
 
 <script>
 const card = document.getElementById('card');
 
+/* ===== ТЕМА ===== */
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  localStorage.setItem(
+    'theme',
+    document.body.classList.contains('light') ? 'light' : 'dark'
+  );
+}
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light');
+}
+
+/* ===== РЕКЛАМА (UTM) ===== */
+const params = new URLSearchParams(window.location.search);
+const source = params.get('utm_source');
+
+if (source === 'vk') card.classList.add('vk-focus');
+if (source === 'tg' || source === 'telegram') card.classList.add('tg-focus');
+
+/* ===== TELEGRAM ===== */
 function openTelegram() {
-  card.classList.add('tg-active');
+  ym(METRIKA_ID, 'reachGoal', 'click_tg');
+  card.classList.add('tg-focus');
   setTimeout(() => {
     window.location.href = "tg://resolve?domain=belpriceparts";
     setTimeout(() => {
@@ -178,8 +207,10 @@ function openTelegram() {
   }, 180);
 }
 
+/* ===== VK ===== */
 function openVK() {
-  card.classList.add('vk-active');
+  ym(METRIKA_ID, 'reachGoal', 'click_vk');
+  card.classList.add('vk-focus');
   setTimeout(() => {
     window.location.href = "VK_LINK_HERE";
   }, 180);
@@ -187,5 +218,4 @@ function openVK() {
 </script>
 
 </body>
-  
 </html>
