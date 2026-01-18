@@ -7,11 +7,12 @@
 
 <style>
 :root {
-  --bg: #03040a;
-  --card: rgba(255,255,255,0.08);
+  --bg: #0b1220;
+  --card: rgba(255,255,255,0.07);
   --text: #ffffff;
   --tg: #2AABEE;
-  --vk: #0077FF;
+  --vk: #005BFF;
+  --neutral: rgba(255,255,255,0.08);
 }
 
 * { box-sizing: border-box; }
@@ -20,8 +21,8 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(0,240,255,0.15), transparent 60%),
-    radial-gradient(circle at bottom, rgba(143,0,255,0.2), transparent 60%),
+    radial-gradient(circle at top, rgba(42,171,238,0.12), transparent 60%),
+    radial-gradient(circle at bottom, rgba(0,91,255,0.15), transparent 60%),
     var(--bg);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text);
@@ -37,29 +38,44 @@ body {
   border-radius: 28px;
   background: var(--card);
   backdrop-filter: blur(16px);
-  box-shadow: 0 0 50px rgba(0,0,0,0.6);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
   text-align: center;
-  animation: appear 1s cubic-bezier(.2,.8,.2,1);
+  animation: appear 0.9s ease;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+
+.card.tg-active {
+  box-shadow: 0 0 50px rgba(42,171,238,0.8);
+}
+
+.card.vk-active {
+  box-shadow: 0 0 50px rgba(0,91,255,0.8);
 }
 
 @keyframes appear {
-  from { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(10px); }
-  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  from { opacity: 0; transform: translateY(25px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .avatar {
   width: 112px;
   height: 112px;
   border-radius: 50%;
-  border: 3px solid #00f0ff;
-  box-shadow: 0 0 30px #00f0ff;
+  border: 3px solid #2AABEE;
+  box-shadow: 0 0 25px rgba(42,171,238,0.6);
   object-fit: cover;
   margin-bottom: 18px;
 }
 
 h1 {
   font-size: 28px;
-  margin: 10px 0;
+  margin: 8px 0;
+}
+
+.subtitle {
+  font-size: 15px;
+  opacity: 0.9;
+  margin-bottom: 14px;
 }
 
 p {
@@ -78,13 +94,11 @@ p {
 }
 
 .platform {
-  position: relative;
   padding: 22px;
   border-radius: 20px;
-  background: rgba(255,255,255,0.06);
+  background: var(--neutral);
   cursor: pointer;
   transition: 0.3s ease;
-  overflow: hidden;
 }
 
 .platform span {
@@ -99,16 +113,13 @@ p {
   opacity: 0.7;
 }
 
-/* Telegram */
+/* Hover */
 .platform.tg:hover {
-  background: rgba(42,171,238,0.15);
-  box-shadow: 0 0 40px rgba(42,171,238,0.7);
+  background: rgba(42,171,238,0.18);
 }
 
-/* VK */
 .platform.vk:hover {
-  background: rgba(0,119,255,0.15);
-  box-shadow: 0 0 40px rgba(0,119,255,0.7);
+  background: rgba(0,91,255,0.18);
 }
 
 .note {
@@ -121,30 +132,27 @@ p {
 
 <body>
 
-<div class="card">
+<div class="card" id="card">
   <img class="avatar"
        src="https://t.me/i/userpic/320/belpriceparts.jpg"
        alt="BelPrice">
 
   <h1>BelPrice</h1>
+  <div class="subtitle">Аукцион запчастей</div>
 
   <p>
-    Онлайн-аукцион, агрегатор и интернет-магазин запчастей.<br><br>
     📦 Любые детали — в разы дешевле<br>
     ⚡️ Доставка за 24 часа по всей РФ<br>
-    💳 Крипта / безнал / наличные
+    💳 Криптовалюта / Оплата по карте
   </p>
 
-  <!-- ВЫБОР ПЛАТФОРМЫ -->
   <div class="platforms">
 
-    <!-- TELEGRAM -->
     <div class="platform tg" onclick="openTelegram()">
       <span>Telegram</span>
       <small>Канал и лоты</small>
     </div>
 
-    <!-- VK -->
     <div class="platform vk" onclick="openVK()">
       <span>VK</span>
       <small>Сообщество</small>
@@ -158,16 +166,23 @@ p {
 </div>
 
 <script>
-/* УМНЫЙ TELEGRAM */
+const card = document.getElementById('card');
+
 function openTelegram() {
-  window.location.href = "tg://resolve?domain=belpriceparts";
-  setTimeout(function() {
-    window.location.href = "https://t.me/belpriceparts";
-  }, 500);
+  card.classList.add('tg-active');
+  setTimeout(() => {
+    window.location.href = "tg://resolve?domain=belpriceparts";
+    setTimeout(() => {
+      window.location.href = "https://t.me/belpriceparts";
+    }, 500);
+  }, 180);
 }
 
 function openVK() {
-  window.location.href = "https://vk.com/belka.drive";
+  card.classList.add('vk-active');
+  setTimeout(() => {
+    window.location.href = "VK_LINK_HERE";
+  }, 180);
 }
 </script>
 
